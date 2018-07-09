@@ -1,0 +1,38 @@
+﻿@page
+@model Application.IndexModel
+@{
+    ViewData["Title"] = "Application";
+}
+
+<h2>Application</h2>
+
+<p>Please enter your name and pick the Sectors you are currently involved in.</p>
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="FormData.Name" class="control-label"></label>
+                <input asp-for="FormData.Name" type="text" class="form-control" />
+                <span asp-validation-for="FormData.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FormData.SectorsValues" class="control-label"></label>
+                <select asp-for="FormData.SectorsValues" class="form-control" multiple size="5">
+                    @foreach (var item in Model.SectorOptions)
+                    {
+                        <option value="@item.Value" style="padding-left: @(item.Level * 15)px">@item.Title</option>
+                    }
+                </select>
+                <span asp-validation-for="FormData.SectorsValues" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FormData.Agreement" class="control-label"></label>
+                <input asp-for="FormData.Agreement" type="checkbox" class="form-control" />
+                <input asp-for="FormData.IsTrue" type="hidden" value="true" />
+                <span asp-validation-for="FormData.Agreement" class="text-danger"></span>
+            </div>
+            <input type="submit" value="Save" class="btn btn-default" />
+        </form>
+    </div>
+</div>
